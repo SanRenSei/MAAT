@@ -18,7 +18,7 @@ export default class Text extends BaseComponent {
   }
 
   draw(ctx) {
-    if (!this.display) {
+    if (!this.display || !this.text) {
       return;
     }
     let lines = evalOrGet(this.text).split('\n');

@@ -164,7 +164,7 @@ export default class BaseComponent {
     return this.transformSnapshot;
   }
 
-  computeSprite() {
+  computeSprite():string {
     return evalOrGet(this.sprite);
   }
 
