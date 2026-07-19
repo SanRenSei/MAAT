@@ -1,6 +1,12 @@
 import eventDispatcher from "./Dispatcher.js";
 
 class WebsocketConnection {
+  connection: any;
+  url: any;
+  connectionId: any;
+  uuid: any;
+  retryDelay: number;
+  maxRetryDelay: number;
 
   constructor() {
     this.connection = null;
@@ -36,7 +42,7 @@ class WebsocketConnection {
       }
     };
 
-    this.connection.onmessage = (message) => {
+    this.connection.onmessage = (message:any) => {
       try {
         var jsonMsg = JSON.parse(message.data || message.utf8Data);
         if (jsonMsg.tag == 'connected') {
@@ -54,7 +60,7 @@ class WebsocketConnection {
       }
     };
 
-    this.connection.onclose = evt => {
+    this.connection.onclose = (evt:any) => {
       console.log('Connection closed');
       console.log(evt)
       setTimeout(() => this.connect(), this.retryDelay);
@@ -66,7 +72,7 @@ class WebsocketConnection {
     };
   }
 
-  sendMessage(msg) {
+  sendMessage(msg:any) {
     this.connection.send(JSON.stringify(msg));
   }
 

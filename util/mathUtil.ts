@@ -53,7 +53,11 @@ export default class MathUtil {
   }
 
   static normalize(vec2v) {
-    return this.mult2v(vec2v, 1/this.get2vMag(vec2v));
+    let mag = this.get2vMag(vec2v);
+    if (mag==0) {
+      return vec2v;
+    }
+    return this.mult2v(vec2v, 1/mag);
   }
 
   static combineTransforms(t1, t2) {

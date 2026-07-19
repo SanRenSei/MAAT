@@ -67,18 +67,21 @@ export default class BaseComponent {
     return this;
   }
 
-  withPosition(initialPosition) {
+  withPosition(initialPosition:any) {
     this.position = initialPosition;
     this.takeTransformSnapshot();
     return this;
   }
 
-  withCameraTransform(cameraTransform) {
+  withCameraTransform(cameraTransform:any) {
+    if (!cameraTransform) {
+      return;
+    }
     if (typeof cameraTransform == 'function') {
       this.cameraTransform = cameraTransform;
       return this;
     }
-    this.cameraTransform = (coords) => {
+    this.cameraTransform = (coords:any) => {
       let {x,y,w,h,s,r} = coords;
       let drawWidth = 800, drawHeight = 600;
       return {
@@ -92,19 +95,19 @@ export default class BaseComponent {
     return this;
   }
 
-  withRotation(initialRotation) {
+  withRotation(initialRotation:any) {
     this.rotation = initialRotation;
     return this;
   }
 
-  withTransform(transform) {
-    this.withPosition(transform);
-    this.withSize(transform);
-    this.withRotation(transform.r || 0);
+  withTransform({x=0, y=0, r=0, w=0, h=0}) {
+    this.withPosition({x,y});
+    this.withSize({w,h});
+    this.withRotation(r);
     return this;
   }
 
-  withSize(initialSize) {
+  withSize(initialSize:any) {
     if (typeof initialSize == 'number') {
       initialSize = {w:initialSize, h:initialSize};
     }
@@ -113,7 +116,7 @@ export default class BaseComponent {
     return this;
   }
 
-  withSprite(initialSprite) {
+  withSprite(initialSprite:any) {
     this.sprite = initialSprite;
     return this;
   }

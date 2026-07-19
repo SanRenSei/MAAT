@@ -13,7 +13,7 @@ export default class Rect extends BaseComponent {
     }
   }
 
-  draw(ctx) {
+  draw(ctx:any) {
     if (!this.display) {
       return;
     }
@@ -30,7 +30,7 @@ export default class Rect extends BaseComponent {
     super.draw(ctx);
   }
 
-  onClick(evtHandler) {
+  onClick(evtHandler:any) {
     this.addChild(new Clickable(this,evtHandler));
   }
 
