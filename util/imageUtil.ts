@@ -1,6 +1,10 @@
 
 export default class ImageUtil {
 
+  static randomHexColor() {
+    return `#${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
+  }
+
   static applyMask(initialImage, r, g, b, a = 1) {
     let canvas = document.createElement('canvas');
     let ctx = canvas.getContext('2d');

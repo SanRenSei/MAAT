@@ -3,10 +3,12 @@ import BaseComponent from "./BaseComponent.js";
 
 export default class Oval extends BaseComponent {
   fillColor: string|null;
+  color: string|null;
 
-  constructor(params:{fillColor?:string}={}) {
+  constructor(params:{fillColor?:string,color?:string}={}) {
     super();
     this.fillColor = null;
+    this.color = params.color || null;
     if (params.fillColor) {
       this.fillColor = params.fillColor;
     }
@@ -16,7 +18,7 @@ export default class Oval extends BaseComponent {
     let {x,y,w,h} = this.transformSnapshot;
     ctx.beginPath();
     ctx.ellipse(x, y, w/2, h/2, 0, 0, 2*Math.PI);
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = this.color || 'black';
     ctx.lineWidth = 1;
     ctx.stroke();
     if (this.fillColor) {
