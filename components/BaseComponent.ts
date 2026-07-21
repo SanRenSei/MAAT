@@ -153,7 +153,7 @@ export default class BaseComponent {
   }
 
   computeSize() {
-    return {w:this.computeWidth(), h:this.computeHeight()};
+    return {w:this.computeWidth()*this.scale, h:this.computeHeight()*this.scale};
   }
 
   takeTransformSnapshot() {
