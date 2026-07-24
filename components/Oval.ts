@@ -20,6 +20,10 @@ export default class Oval extends BaseComponent {
   }
 
   draw(ctx:any) {
+    if (this.arc[0]==0 && this.arc[1]==2*Math.PI) {
+      this.drawFull(ctx);
+      return;
+    }
     let {x,y,w,h} = this.transformSnapshot;
     ctx.beginPath();
     ctx.moveTo(x, y);
@@ -32,6 +36,26 @@ export default class Oval extends BaseComponent {
       ctx.fillStyle = this.fillColor;
       ctx.fill();
     }
+    super.draw(ctx);
+  }
+
+  drawFull(ctx:any) {
+    let {x,y,w,h} = this.transformSnapshot;
+
+    ctx.beginPath();
+    ctx.ellipse(x, y, w/2, h/2, 0, 0, 2*Math.PI);
+
+    if (this.fillColor) {
+      ctx.fillStyle = this.fillColor;
+      ctx.fill();
+    }
+
+    if (this.color) {
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
     super.draw(ctx);
   }
 
